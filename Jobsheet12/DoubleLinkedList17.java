@@ -1,6 +1,5 @@
 package Jobsheet12;
 
-import org.w3c.dom.Node;
 
 public class DoubleLinkedList17 {
     // Percobaan 1 nomor 5
