@@ -7,9 +7,9 @@ public class RoyalMain {
         Scanner input = new Scanner(System.in); // Membuat objek Scanner
         SistemAntrean antrean = new SistemAntrean();
         //Instansiasi Objek dengan menggunakan konstruktor sesuai dengan catatan modul supaya tidak membuang waktu
-        antrean.tambahAntrean(new Pembeli("Ainra", "08224500000"));
-        antrean.tambahAntrean(new Pembeli("Danra", "08224511111"));
-        antrean.tambahAntrean(new Pembeli("Sanri", "08224522222"));
+        antrean.tambahAntreanSilent(new Pembeli("Ainra", "08224500000"));
+        antrean.tambahAntreanSilent(new Pembeli("Danra", "08224511111"));
+        antrean.tambahAntreanSilent(new Pembeli("Sanri", "08224522222"));
         int pilihan;
         // Perulangan Fitur
         do {

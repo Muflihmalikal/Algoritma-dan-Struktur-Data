@@ -181,4 +181,20 @@ public class SistemAntrean {
             current = current.next; // Lanjut ke data berikutnya
         }
     }
+
+    //Penmabhan Untuk data yang diinputkan saat awal program tidak muncul dalam permukaan 
+    public void tambahAntreanSilent(Pembeli pembeliBaru) {
+        nomorAntreanOtomatis++; 
+        Node newNode = new Node(nomorAntreanOtomatis, pembeliBaru);
+
+        if (isEmpty()) { 
+            head = tail = newNode;
+        } else {
+            tail.next = newNode;
+            newNode.prev = tail;
+            tail = newNode;
+        }
+        size++;
+        // Sengaja tidak ada System.out.println di sini agar senyap
+    }
 }
