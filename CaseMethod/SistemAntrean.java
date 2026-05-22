@@ -160,9 +160,8 @@ public class SistemAntrean {
         System.out.println("========================================");
         System.out.println("LAPORAN PESANAN (URUT NAMA PESANAN)");
         System.out.println("========================================");
-        // Format spasi kolom: 18 kiri, 25 kiri, sisanya
-        System.out.printf("%-18s %-25s %s\n", "Kode Pesanan", "Nama Pesanan", "Harga");
-
+        // Format ditambahkan kolom kategori (15 karakter kiri)
+        System.out.printf("%-18s %-25s %-15s %s\n", "Kode Pesanan", "Nama Pesanan", "Kategori", "Harga");
         if (isRiwayatEmpty()) {
             System.out.println("Belum ada pesanan yang masuk.");
             return;
@@ -173,21 +172,38 @@ public class SistemAntrean {
 
         // Traversal mencetak data dari Double Linked List Riwayat yang sudah terurut
         Node current = headRiwayat;
+        // Variabel untuk menyimpan rekap pesanan
+        int totalMakanan = 0;
+        int totalMinuman = 0;
         while (current != null) {
-            System.out.printf("%-18d %-25s %d\n",
+            System.out.printf("%-18d %-25s %-15s %d\n",
                     current.pesanan.kodePesanan,
                     current.pesanan.namaPesanan,
+                    current.pesanan.kategori,// Menampilkan Kategori dalam kolom pesanan
                     current.pesanan.harga);
+            // Proses pengecekan kategori untuk rekap (mengabaikan huruf besar/kecil)
+            if (current.pesanan.kategori.equalsIgnoreCase("Makanan")) {
+                totalMakanan++;
+            } else if (current.pesanan.kategori.equalsIgnoreCase("Minuman")) {
+                totalMinuman++;
+            }
             current = current.next; // Lanjut ke data berikutnya
         }
+        // Menampilkan Rekapitulasi di bagian bawah
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("Rekap Jumlah Pesanan:");
+        System.out.println("Total Makanan : " + totalMakanan);
+        System.out.println("Total Minuman : " + totalMinuman);
+        System.out.println("=================================================================");
     }
 
-    //Penmabhan Untuk data yang diinputkan saat awal program tidak muncul dalam permukaan 
+    // Penmabhan Untuk data yang diinputkan saat awal program tidak muncul dalam
+    // permukaan
     public void tambahAntreanSilent(Pembeli pembeliBaru) {
-        nomorAntreanOtomatis++; 
+        nomorAntreanOtomatis++;
         Node newNode = new Node(nomorAntreanOtomatis, pembeliBaru);
 
-        if (isEmpty()) { 
+        if (isEmpty()) {
             head = tail = newNode;
         } else {
             tail.next = newNode;

@@ -6,10 +6,12 @@ public class RoyalMain {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in); // Membuat objek Scanner
         SistemAntrean antrean = new SistemAntrean();
-        //Instansiasi Objek dengan menggunakan konstruktor sesuai dengan catatan modul supaya tidak membuang waktu
+        // Instansiasi Objek dengan menggunakan konstruktor sesuai dengan catatan modul
+        // supaya tidak membuang waktu
         antrean.tambahAntreanSilent(new Pembeli("Ainra", "08224500000"));
         antrean.tambahAntreanSilent(new Pembeli("Danra", "08224511111"));
         antrean.tambahAntreanSilent(new Pembeli("Sanri", "08224522222"));
+        antrean.tambahAntreanSilent(new Pembeli("Budi", "08424842274"));
         int pilihan;
         // Perulangan Fitur
         do {
@@ -28,17 +30,21 @@ public class RoyalMain {
             switch (pilihan) {
                 case 1:
                     Pembeli pblawal = inputpPembeli(input); // method ada di bawah
-                    antrean.tambahAntrean(pblawal); // Menambahkan antrean dengan memanggil method tambahAntrean yang ada dalam class SistemAntrean
+                    antrean.tambahAntrean(pblawal); // Menambahkan antrean dengan memanggil method tambahAntrean yang
+                                                    // ada dalam class SistemAntrean
                     break;
                 case 2:
                     antrean.cetakAntrian(); // Memanggil method cetakAntrian yang ada dalam class SistemAntrean
                     break;
                 case 3:
                     Pesanan psnawal = inputpPesanan(input); // Method ada di bawah
-                    antrean.hapusAntrianDanPesan(psnawal); // Menambahkan pesanan dan menghapus antrean dengan memanggil method hapusAntrianDanPesan yang ada dalam class SistemAntrean
+                    antrean.hapusAntrianDanPesan(psnawal); // Menambahkan pesanan dan menghapus antrean dengan memanggil
+                                                           // method hapusAntrianDanPesan yang ada dalam class
+                                                           // SistemAntrean
                     break;
                 case 4:
-                    antrean.laporanPesanan();// Mencetak seluruh riwayat pesanan yang sudah diurutkan secara manual berdasarkan abjad (Nama Pesanan)
+                    antrean.laporanPesanan();// Mencetak seluruh riwayat pesanan yang sudah diurutkan secara manual
+                                             // berdasarkan abjad (Nama Pesanan)
                     break;
                 case 0:
                     System.out.println("Program selesai.");
@@ -67,9 +73,26 @@ public class RoyalMain {
         input.nextLine();
         System.out.print("Nama pesanan    : ");
         String namaPesanan = input.nextLine();
+
+        // --- PROSES VALIDASI INPUT KATEGORI ---
+        String kategori;
+        boolean isValidKategori = false;
+        do {
+            System.out.print("Kategori (Makanan/Minuman): ");
+            kategori = input.nextLine();
+
+            // Cek apakah input adalah Makanan atau Minuman (mengabaikan huruf besar/kecil)
+            if (kategori.equalsIgnoreCase("Makanan") || kategori.equalsIgnoreCase("Minuman")) {
+                isValidKategori = true;
+            } else {
+                System.out.println("❌ Input tidak valid! Harap hanya memasukkan 'Makanan' atau 'Minuman'.");
+            }
+        } while (!isValidKategori);
+
         System.out.print("Harga   : ");
         int harga = input.nextInt();
         input.nextLine();
-        return new Pesanan(kodePesanan, namaPesanan, harga);
+        // Return objek dengan menyertakan variabel kategori
+        return new Pesanan(kodePesanan, namaPesanan, harga, kategori);
     }
 }
