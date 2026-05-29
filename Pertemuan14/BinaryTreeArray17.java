@@ -1,5 +1,4 @@
 package Pertemuan14;
-
 public class BinaryTreeArray17 {
     Mahasiswa17[] dataMahasiswa;
     int idxLast;
@@ -24,5 +23,23 @@ public class BinaryTreeArray17 {
         }
     }
 
+    public void add(Mahasiswa17 data) {
+        if (idxLast < dataMahasiswa.length - 1) {
+            idxLast++;
+            dataMahasiswa[idxLast] = data;
+            System.out.println("Data mahasiswa ditambahkan pada indeks " + idxLast);
+        } else {
+            System.out.println("Array Tree sudah penuh!");
+        }
+    }
 
+    void traversePreOrder(int idxStart) {
+        if (idxStart <= idxLast) {
+            if (dataMahasiswa[idxStart] != null) {
+                dataMahasiswa[idxStart].tampilInformasi();
+                traversePreOrder(2 * idxStart + 1);
+                traversePreOrder(2 * idxStart + 2);
+            }
+        }
+    }
 }
